@@ -1,0 +1,9 @@
+flag = ''
+leak_stack  = ['8cb6390', '804b000', '80489c3', 'f7f0ad80', 'ffffffff', '1', '8cb4160', 'f7f18110', 'f7f0adc7', '0', '8cb5180', '1', '8cb6370', '8cb6390', '6f636970', '7b465443', '306c5f49', '345f7435', '6d5f6c6c', '306d5f79', '5f79336e', '32666331', '30613130', 'ff97007d', 'f7f45af8', 'f7f18440', 'c9e12000', '1', '0', 'f7da7be9', 'f7f190c0', 'f7f0a5c0', 'f7f0a000', 'ff970888', 'f7d9858d', 'f7f0a5c0', '8048eca', 'ff970894', '0', 'f7f2cf09', '804b000', 'f7f0a000', 'f7f0ae20', 'ff9708c8', 'f7f32d50', 'f7f0b890', 'c9e12000', 'f7f0a000', '804b000', 'ff9708c8', '\n']
+for data in leak_stack:
+    try:
+        data = bytearray.fromhex(data).decode()[::-1]
+        flag += data
+    except:
+        continue
+print(flag)
