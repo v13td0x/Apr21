@@ -83,6 +83,6 @@ while ( 1 )
 puts("Wrong!");
 ```
 
-Ta cần biến COUNTER > 49 thì X = 1 expression using flag, mà COUNTER chỉ tăng khi trả lời đúng câu hỏi.
+Biến COUNTER > 49 thì X = 1 expression using flag, mà COUNTER chỉ tăng khi trả lời đúng câu hỏi.
 
 Khi COUNTER > 49 trở đi thì từ X => flag
