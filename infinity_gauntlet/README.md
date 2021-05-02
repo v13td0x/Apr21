@@ -10,7 +10,7 @@ while ( 1 )
 {
   printf("=== ROUND %d ===\n", (unsigned int)COUNTER);
   v14 = rand();
-  X = COUNTER > 49 ? (unsigned __int8)flag[v14 % v6] | ((unsigned __int8)(v14 % v6 + COUNTER) << 8) : rand() % 0x10000; // flag
+  X = COUNTER > 49 ? (unsigned __int8)flag[v14 % flag_len] | ((unsigned __int8)(v14 % flag_len + COUNTER) << 8) : rand() % 0x10000; // flag
   if ( (rand() & 1) != 0 )
   {
     v12 = rand() % 3;
@@ -83,6 +83,24 @@ while ( 1 )
 puts("Wrong!");
 ```
 
-Biến COUNTER > 49 thì X = 1 expression using flag, mà COUNTER chỉ tăng khi trả lời đúng câu hỏi.
+Khi COUNTER > 49 trở đi thì từ X => flag, mà COUNTER chỉ tăng khi trả lời đúng câu hỏi
 
-Khi COUNTER > 49 trở đi thì từ X => flag
+------
+
+Sau khi pass 49 câu hỏi thì khôi phục flag từ list lưu các X khi COUNTER > 50
+
+**Recover flag**: 
+
+prog sẽ đọc flag = fgets(), sau đó XOR từng kí tự với 1 biến theo formula này
+
+```c
+flag[i] ^= (17*i)
+```
+
+và khi COUNTER > 49:
+
+```C
+ v14 = rand()
+ X = flag[v14 % flag_len] | ((v14 % flag_len + COUNTER) << 8)
+ // |_> X = flag[i] | ((i+COUNTER) << 8)
+```
