@@ -1,0 +1,1 @@
+We initially need to call `foothold_function@plt` in order to trigger the dynamic loader to populate the `GOT` with the function address we want.
